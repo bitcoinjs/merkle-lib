@@ -34,7 +34,7 @@ function unflatten (list) {
     n -= m
   }
 
-  return levels.reverse()
+  return levels
 }
 
 module.exports = {
