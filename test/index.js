@@ -12,8 +12,8 @@ tape('merkletree, for each fixture', function (t) {
       return crypto.createHash(f.hash).update(x).digest()
     }
 
-    var values = f.values.map(x => new Buffer(x, 'hex'))
-    var tree = merkle(values, digest).map(x => x.toString('hex'))
+    var values = f.values.map(function (x) { return new Buffer(x, 'hex') })
+    var tree = merkle(values, digest).map(function (x) { return x.toString('hex') })
     var root = fastRoot(values, digest).toString('hex')
 
     t.same(f.tree, tree, 'merkle tree matches the expected tree')
