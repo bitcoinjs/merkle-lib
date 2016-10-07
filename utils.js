@@ -19,8 +19,28 @@ function mton (m) {
   return n + 1
 }
 
+function flatten (levels) {
+  return [].concat.apply([], levels)
+}
+
+function unflatten (list) {
+  var n = list.length
+  var levels = []
+
+  while (n > 0) {
+    var m = ntom(n)
+
+    levels.push(list.slice(n - m, n))
+    n -= m
+  }
+
+  return levels.reverse()
+}
+
 module.exports = {
   depth: depth,
-  ntom,
-  mton
+  flatten: flatten,
+  unflatten: unflatten,
+  ntom: ntom,
+  mton: mton
 }
