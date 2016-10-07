@@ -30,7 +30,6 @@ function merkle (values, digestFn) {
     levels.push(level)
   } while (level.length > 1)
 
-  levels = levels.reverse()
   return utils.flatten(levels)
 }
 

@@ -15,7 +15,7 @@ tape('generation, for each fixture', function (t) {
     var root = fastRoot(values, digest).toString('hex')
 
     t.same(f.tree, tree, 'matches the tree')
-    t.equal(f.tree[0], root, 'fastRoot returns the tree root')
+    t.equal(f.tree[f.tree.length - 1], root, 'fastRoot returns the tree root')
   })
 
   t.end()
