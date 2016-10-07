@@ -9,7 +9,6 @@ A performance conscious library for merkle root and tree calculations.
 
 
 ## Examples
-
 Tree
 ``` javascript
 var merkle = require('merkle-lib')
@@ -51,3 +50,7 @@ fastRoot(data, function (data) {
 }).toString('hex')
 // => 'c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1'
 ```
+
+
+#### Credits
+Thanks to [Meni Rosenfield on bitcointalk](https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025) for the math.
