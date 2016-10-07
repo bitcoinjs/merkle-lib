@@ -1,0 +1,43 @@
+{
+  "name": "merkle-fast",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "bitcoin",
+    "bitcoinjs-lib",
+    "leaf",
+    "merkle tree",
+    "merkle",
+    "root",
+    "hash",
+    "chain",
+    "tree"
+  ],
+  "homepage": "https://github.com/bitcoinjs/merkle-fast",
+  "bugs": {
+    "url": "https://github.com/bitcoinjs/merkle-fast/issues"
+  },
+  "license": "MIT",
+  "author": "Daniel Cousens",
+  "files": [
+    "index.js",
+    "fastRoot.js"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitcoinjs/merkle-fast.git"
+  },
+  "scripts": {
+    "prepublish": "npm run test",
+    "coverage": "nyc --check-coverage --branches 100 --functions 100 tape test/*.js",
+    "lint": "standard",
+    "test": "npm run lint && npm run unit",
+    "unit": "tape test/*.js"
+  },
+  "devDependencies": {
+    "nyc": "^6.4.0",
+    "standard": "*",
+    "tape": "^4.5.1"
+  }
+}
