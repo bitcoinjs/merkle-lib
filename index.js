@@ -3,7 +3,6 @@ function _flat (values, digestFn) {
   var length = values.length
   var results = []
 
-  if (length === 1) return values.concat()
   for (var i = 0; i < length; i += 2) {
     var left = values[i]
     var right = i + 1 === length ? left : values[i + 1]
@@ -19,8 +18,9 @@ function _flat (values, digestFn) {
 function merkle (values, digestFn) {
   if (!Array.isArray(values)) throw TypeError('Expected values Array')
   if (typeof digestFn !== 'function') throw TypeError('Expected digest Function')
+  if (values.length === 1) return values.concat()
 
-  var levels = []
+  var levels = [values]
   var level = values
 
   do {

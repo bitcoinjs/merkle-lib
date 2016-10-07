@@ -4,9 +4,7 @@ var fastRoot = require('../fastRoot')
 var tape = require('tape')
 var fixtures = require('./fixtures')
 
-tape('merkletree, for each fixture', function (t) {
-  t.plan(fixtures.length * 2)
-
+tape('generation, for each fixture', function (t) {
   fixtures.forEach(function (f) {
     function digest (x) {
       return crypto.createHash(f.hash).update(x).digest()
@@ -16,7 +14,9 @@ tape('merkletree, for each fixture', function (t) {
     var tree = merkle(values, digest).map(function (x) { return x.toString('hex') })
     var root = fastRoot(values, digest).toString('hex')
 
-    t.same(f.tree, tree, 'merkle tree matches the expected tree')
-    t.equal(f.tree[0], root, 'fastRoot matches the expected tree root')
+    t.same(f.tree, tree, 'matches the tree')
+    t.equal(f.tree[0], root, 'fastRoot returns the tree root')
   })
+
+  t.end()
 })
