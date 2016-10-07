@@ -9,17 +9,14 @@ tape('proofs, for each fixture', function (t) {
       return crypto.createHash(f.hash).update(x).digest()
     }
 
-    f.proofs = {}
-    f.values.forEach(function (v, i) {
+    f.values.forEach(function (v) {
       var proof = merkleProof(f.tree, v)
+      t.same(f.proofs[v], proof)
 
-      f.proofs[v] = proof
-
+      // map to Buffers for verify
       proof = proof.map(function (x) { return new Buffer(x, 'hex') })
       t.equal(merkleProof.verify(proof, digest), true, 'is verifiable')
     })
-
-    require('fs').writeFileSync('./test/fixtures.json', JSON.stringify(fixtures, null, 2))
   })
 
   t.end()
