@@ -1,5 +1,5 @@
 {
-  "name": "merkle-fast",
+  "name": "merkle-lib",
   "version": "1.0.0",
   "description": "",
   "keywords": [
@@ -13,9 +13,9 @@
     "chain",
     "tree"
   ],
-  "homepage": "https://github.com/bitcoinjs/merkle-fast",
+  "homepage": "https://github.com/bitcoinjs/merkle-lib",
   "bugs": {
-    "url": "https://github.com/bitcoinjs/merkle-fast/issues"
+    "url": "https://github.com/bitcoinjs/merkle-lib/issues"
   },
   "license": "MIT",
   "author": "Daniel Cousens",
@@ -26,7 +26,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitcoinjs/merkle-fast.git"
+    "url": "https://github.com/bitcoinjs/merkle-lib.git"
   },
   "scripts": {
     "prepublish": "npm run test",
