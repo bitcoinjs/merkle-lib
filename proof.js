@@ -3,42 +3,36 @@ var utils = require('./utils')
 function proof (list, leaf) {
   var index = list.indexOf(leaf)
 
-  // no proof exists
+  // does the leaf node even exist?
   if (index === -1) return null
 
   var n = list.length
   var nodes = []
 
-  var y = 0
-  while (n > 1) {
-    var m = utils.ntom(n)
+  var i = 0
+  while (i < n - 1) {
+    var m = utils.ntom(n - i)
 
     var odd = index % 2
     if (odd) --index
 
-    var offset = y + index
+    var offset = i + index
     var left = list[offset]
     var right = index === (m - 1) ? left : list[offset + 1]
 
-    if (y > 0) {
-      if (odd) {
-        nodes.push(left)
-        nodes.push(null)
-      } else {
-        nodes.push(null)
-        nodes.push(right)
-      }
+    if (i > 0) {
+      nodes.push(odd ? left : null)
+      nodes.push(odd ? null : right)
     } else {
       nodes.push(left)
       nodes.push(right)
     }
 
     index = (index / 2) | 0
-    y += m
-    n -= m
+    i += m
   }
 
-  nodes.push(list[list.length - 1])
+  nodes.push(list[n - 1])
   return nodes
 }
 
