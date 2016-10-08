@@ -21,7 +21,8 @@
   "author": "Daniel Cousens",
   "files": [
     "index.js",
-    "fastRoot.js"
+    "fastRoot.js",
+    "proof.js"
   ],
   "main": "index.js",
   "repository": {
