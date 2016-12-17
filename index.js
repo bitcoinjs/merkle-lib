@@ -1,5 +1,3 @@
-var utils = require('./utils')
-
 // returns an array of hashes of length: values.length / 2 + (values.length % 2)
 function _derive (values, digestFn) {
   var length = values.length
@@ -30,7 +28,7 @@ function merkle (values, digestFn) {
     levels.push(level)
   } while (level.length > 1)
 
-  return utils.flatten(levels)
+  return [].concat.apply([], levels)
 }
 
 module.exports = merkle
