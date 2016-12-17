@@ -16,7 +16,7 @@ function makeProof (tree, leaf) {
   var index = tree.indexOf(leaf)
 
   // does the leaf node even exist [in the tree]?
-  if (index === -1) throw new TypeError('Unknown leaf')
+  if (index === -1) return null
 
   var n = tree.length
   var nodes = []

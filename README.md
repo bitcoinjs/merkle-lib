@@ -63,6 +63,10 @@ Proof (with verify)
 var merkleProof = require('merkle-lib/proof')
 var proof = merkleProof(tree, data[0])
 
+if (proof === null) {
+  console.error('No proof exists!')
+}
+
 console.log(proof.map(x => x && x.toString('hex')))
 // => [
 //   'cafebeef',
