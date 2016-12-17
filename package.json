@@ -1,6 +1,6 @@
 {
   "name": "merkle-lib",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A performance conscious library for merkle root and tree calculations.",
   "keywords": [
     "bitcoin",
