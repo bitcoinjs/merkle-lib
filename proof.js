@@ -15,8 +15,8 @@ function mton (m) {
 function makeProof (tree, leaf) {
   var index = tree.indexOf(leaf)
 
-  // does the leaf node even exist?
-  if (index === -1) return null
+  // does the leaf node even exist [in the tree]?
+  if (index === -1) throw new TypeError('Unknown leaf')
 
   var n = tree.length
   var nodes = []
