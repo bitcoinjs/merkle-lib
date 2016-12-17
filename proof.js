@@ -12,13 +12,13 @@ function mton (m) {
   return n + 1
 }
 
-function makeProof (list, leaf) {
-  var index = list.indexOf(leaf)
+function makeProof (tree, leaf) {
+  var index = tree.indexOf(leaf)
 
   // does the leaf node even exist?
   if (index === -1) return null
 
-  var n = list.length
+  var n = tree.length
   var nodes = []
 
   var i = 0
@@ -29,8 +29,8 @@ function makeProof (list, leaf) {
     if (odd) --index
 
     var offset = i + index
-    var left = list[offset]
-    var right = index === (m - 1) ? left : list[offset + 1]
+    var left = tree[offset]
+    var right = index === (m - 1) ? left : tree[offset + 1]
 
     if (i > 0) {
       nodes.push(odd ? left : null)
@@ -44,7 +44,7 @@ function makeProof (list, leaf) {
     i += m
   }
 
-  nodes.push(list[n - 1])
+  nodes.push(tree[n - 1])
   return nodes
 }
 
