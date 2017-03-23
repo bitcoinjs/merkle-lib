@@ -1,12 +1,12 @@
-function width (n, h) {
-  return (n + (1 << h) - 1) >> h
-}
-
 // https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025
 function treeNodeCount (leafCount) {
   var count = 1
   for (var i = leafCount; i > 1; i = (i + 1) >> 1) count += i
   return count
+}
+
+function treeWidth (n, h) {
+  return (n + (1 << h) - 1) >> h
 }
 
 function makeProof (tree, leaf) {
@@ -20,7 +20,7 @@ function makeProof (tree, leaf) {
 
   // does the far right leaf bypass a layer?
   // determine hashable node count...
-  var z = width(n, 1)
+  var z = treeWidth(n, 1)
   while (z > 0) {
     if (treeNodeCount(z) === n) break
     --z
@@ -32,7 +32,7 @@ function makeProof (tree, leaf) {
   var height = 0
   var i = 0
   while (i < n - 1) {
-    var layerWidth = width(z, height)
+    var layerWidth = treeWidth(z, height)
     ++height
 
     var odd = index % 2
