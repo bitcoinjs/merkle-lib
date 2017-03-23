@@ -12,7 +12,7 @@ tape('proofs, for each fixture', function (t) {
 
     f.values.forEach(function (v) {
       var proof = merkleProof(f.tree, v)
-      t.same(f.proofs[v], proof)
+      t.same(proof, f.proofs[v])
 
       // map to Buffers for verify
       proof = proof.map(function (x) { return x && new Buffer(x, 'hex') })

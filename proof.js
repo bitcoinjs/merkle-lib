@@ -26,6 +26,9 @@ function makeProof (tree, leaf) {
     --z
   }
 
+  // XXX: not reach-able (AFAIK) but handled anyway
+  if (z === 0) throw Error('Unknown solution')
+
   var height = 0
   var i = 0
   while (i < n - 1) {
