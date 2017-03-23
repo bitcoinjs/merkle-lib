@@ -3,9 +3,9 @@ function width (n, h) {
 }
 
 // https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025
-function treeNodeCount (n) {
+function treeNodeCount (leafCount) {
   var count = 1
-  for (var i = n; i > 1; i = (i + 1) >> 1) count += i
+  for (var i = leafCount; i > 1; i = (i + 1) >> 1) count += i
   return count
 }
 
