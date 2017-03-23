@@ -7,6 +7,8 @@ var fixtures = require('./fixtures')
 tape('throws on bad types', function (t) {
   t.throws(function () { merkle('not an array') })
   t.throws(function () { merkle([], 'not a function') })
+  t.throws(function () { fastRoot('not an array') })
+  t.throws(function () { fastRoot([], 'not a function') })
   t.end()
 })
 
