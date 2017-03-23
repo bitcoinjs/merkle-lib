@@ -37,8 +37,8 @@ tape('various node count proofs', function (t) {
   }
 
   for (var k = 0; k < maxNodes; ++k) {
-    let bag = leaves.slice(0, k)
-    let tree = merkle(bag, digest)
+    var bag = leaves.slice(0, k)
+    var tree = merkle(bag, digest)
 
     bag.forEach(function (v) {
       var proof = merkleProof(tree, v)
