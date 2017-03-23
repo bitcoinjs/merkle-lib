@@ -27,7 +27,7 @@ function makeProof (tree, leaf) {
   }
 
   // XXX: not reach-able (AFAIK) but handled anyway
-  if (z === 0) throw Error('Unknown solution')
+  if (z === 0) throw new Error('Unknown solution')
 
   var height = 0
   var i = 0
