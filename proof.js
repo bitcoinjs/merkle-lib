@@ -2,10 +2,10 @@ function width (n, h) {
   return (n + (1 << h) - 1) >> h
 }
 
-function mton (m) {
-  var n = 0
-  for (var i = m; i > 1; i = (i + 1) >> 1) n += i
-  return n + 1
+function nodeCount (n) {
+  var count = 1
+  for (var i = n; i > 1; i = (i + 1) >> 1) count += i
+  return count
 }
 
 function makeProof (tree, leaf) {
@@ -19,7 +19,10 @@ function makeProof (tree, leaf) {
 
   // does the far right leaf bypass a layer?
   var z = width(n, 1)
-  if (mton(z) !== n) --z
+  while (z > 0) {
+    if (nodeCount(z) === n) break
+    --z
+  }
 
   var height = 0
   var i = 0
