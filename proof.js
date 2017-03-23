@@ -29,7 +29,7 @@ function makeProof (tree, leaf) {
   var height = 0
   var i = 0
   while (i < n - 1) {
-    var m = width(z, height)
+    var layerWidth = width(z, height)
     ++height
 
     var odd = index % 2
@@ -37,7 +37,7 @@ function makeProof (tree, leaf) {
 
     var offset = i + index
     var left = tree[offset]
-    var right = index === (m - 1) ? left : tree[offset + 1]
+    var right = index === (layerWidth - 1) ? left : tree[offset + 1]
 
     if (i > 0) {
       nodes.push(odd ? left : null)
@@ -48,7 +48,7 @@ function makeProof (tree, leaf) {
     }
 
     index = (index / 2) | 0
-    i += m
+    i += layerWidth
   }
 
   nodes.push(tree[n - 1])
