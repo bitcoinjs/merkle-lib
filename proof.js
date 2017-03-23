@@ -1,9 +1,5 @@
-function ntom (n) {
-  for (var m = ((n + 1) / 2) | 0; m > 0; m--) {
-    if (mton(m) === n) return m
-  }
-
-  throw new TypeError(n + ' not expected')
+function width (n, h) {
+  return (n + (1 << h) - 1) >> h
 }
 
 function mton (m) {
@@ -21,9 +17,15 @@ function makeProof (tree, leaf) {
   var n = tree.length
   var nodes = []
 
+  // does the far right leaf bypass a layer?
+  var z = width(n, 1)
+  if (mton(z) !== n) --z
+
+  var height = 0
   var i = 0
   while (i < n - 1) {
-    var m = ntom(n - i)
+    var m = width(z, height)
+    ++height
 
     var odd = index % 2
     if (odd) --index
