@@ -13,7 +13,10 @@ tape('throws on bad types', function (t) {
 })
 
 tape('generation, for each fixture', function (t) {
+  t.plan(fixtures.length * 2)
+
   fixtures.forEach(function (f) {
+    var froot = f.tree[f.tree.length - 1]
     function digest (x) {
       return crypto.createHash(f.hash).update(x).digest()
     }
@@ -22,8 +25,8 @@ tape('generation, for each fixture', function (t) {
     var tree = merkle(values, digest).map(function (x) { return x.toString('hex') })
     var root = fastRoot(values, digest).toString('hex')
 
-    t.same(f.tree, tree, 'matches the tree')
-    t.equal(f.tree[f.tree.length - 1], root, 'fastRoot returns the tree root')
+    t.same(tree, f.tree, 'matches the tree')
+    t.equal(root, froot, 'fastRoot returns the tree root' + froot)
   })
 
   t.end()
