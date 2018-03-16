@@ -18,7 +18,7 @@ To avoid this vulnerability [in this implementation],  do not accept unbalanced 
 
 ## Examples
 Preamble
-``` javscript
+``` javascript
 var crypto = require('crypto')
 
 function sha256 (data) {
