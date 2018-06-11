@@ -9,10 +9,10 @@ A performance conscious library for merkle root and tree calculations.
 
 
 ## Warnings
-This implementation is vulnerable to a forgery attack ([as a second pre-image attack](https://en.wikipedia.org/wiki/Merkle_tree#Second_preimage_attack)), see these[\[1\]](https://crypto.stackexchange.com/questions/2106/what-is-the-purpose-of-using-different-hash-functions-for-the-leaves-and-interna)[\[2\]](https://crypto.stackexchange.com/questions/43430/what-is-the-reason-to-separate-domains-in-the-internal-hash-algorithm-of-a-merkl/44971#44971) crypto.stackexchange questions for an explanation.
+This implementation is vulnerable to a forgery attack [as a second pre-image attack](https://en.wikipedia.org/wiki/Merkle_tree#Second_preimage_attack), see these[\[1\]](https://crypto.stackexchange.com/questions/2106/what-is-the-purpose-of-using-different-hash-functions-for-the-leaves-and-interna)[\[2\]](https://crypto.stackexchange.com/questions/43430/what-is-the-reason-to-separate-domains-in-the-internal-hash-algorithm-of-a-merkl/44971#44971) crypto.stackexchange questions for an explanation.
 To avoid this vulnerability,  you should pre-hash your leaves *using a different hash function* than the function provided such that `H(x) != H'(x)`.
 
-This implementation is vulnerable to a forgery attack ([for an unbalanced merkle tree](https://bitcointalk.org/?topic=102395)),  wherein,  in an unbalanced merkle tree, the last leaf node can be duplicated to create an artificial balanced tree,  resulting in the same root hash.
+Additionally, this implementation is vulnerable to a forgery attack [for an unbalanced merkle tree](https://bitcointalk.org/?topic=102395),  wherein,  in an unbalanced merkle tree, the last leaf node can be duplicated to create an artificial balanced tree,  resulting in the same root hash.
 To avoid this vulnerability [in this implementation],  do not accept unbalanced merkle trees in your application.
 
 
