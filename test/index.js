@@ -21,7 +21,7 @@ tape('generation, for each fixture', function (t) {
       return crypto.createHash(f.hash).update(x).digest()
     }
 
-    var values = f.values.map(function (x) { return new Buffer(x, 'hex') })
+    var values = f.values.map(function (x) { return Buffer.from(x, 'hex') })
     var tree = merkle(values, digest).map(function (x) { return x.toString('hex') })
     var root = fastRoot(values, digest).toString('hex')
 

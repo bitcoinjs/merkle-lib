@@ -15,7 +15,7 @@ tape('proofs, for each fixture', function (t) {
       t.same(proof, f.proofs[v])
 
       // map to Buffers for verify
-      proof = proof.map(function (x) { return x && new Buffer(x, 'hex') })
+      proof = proof.map(function (x) { return x && Buffer.from(x, 'hex') })
       t.equal(merkleProof.verify(proof, digest), true, 'is verifiable')
     })
   })
