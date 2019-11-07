@@ -10,7 +10,9 @@ function treeWidth (n, h) {
 }
 
 function makeProof (tree, leaf) {
-  var index = tree.indexOf(leaf)
+  var index = tree.findIndex(function (node) {
+    return (node instanceof Uint8Array ? Buffer.from(node) : node).equals(leaf)
+  })
 
   // does the leaf node even exist [in the tree]?
   if (index === -1) return null
@@ -69,7 +71,7 @@ function verify (proof, digestFn) {
     hash = digestFn(data)
   }
 
-  return hash.equals(root)
+  return (hash instanceof Uint8Array ? Buffer.from(hash) : hash).equals(root)
 }
 
 module.exports = makeProof
