@@ -64,7 +64,7 @@ if (nodeVerMajor() >= 8) {
       }
 
       var arrValues = f.values.map(function (x) { return new Uint8Array(Buffer.from(x, 'hex')) })
-      var tree = merkle(arrValues, digest).map(function (x) { return (x instanceof Uint8Array ? Buffer.from(x) : x).toString('hex') })
+      var tree = merkle(arrValues, digest).map(function (x) { return (!Buffer.isBuffer(x) ? Buffer.from(x) : x).toString('hex') })
       var mixRoot = fastRoot(arrValues, digest)
       var root = (tree.length === 1 ? Buffer.from(mixRoot) : mixRoot).toString('hex')
 

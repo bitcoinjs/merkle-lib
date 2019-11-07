@@ -73,7 +73,7 @@ if (nodeVerMajor() >= 8) {
         var mixProof = merkleProof(mixTree, arrValue)
 
         if (mixProof !== null) {
-          var proof = mixProof.map(function (p) { return p && (p instanceof Uint8Array ? Buffer.from(p) : p).toString('hex') })
+          var proof = mixProof.map(function (p) { return p && (!Buffer.isBuffer(p) ? Buffer.from(p) : p).toString('hex') })
           t.same(proof, f.proofs[v])
 
           // map to Buffers for verify
