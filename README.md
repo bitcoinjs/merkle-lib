@@ -15,6 +15,14 @@ To avoid this vulnerability,  you should pre-hash your leaves *using a different
 Additionally, this implementation is vulnerable to a forgery attack [for an unbalanced merkle tree](https://bitcointalk.org/?topic=102395),  wherein,  in an unbalanced merkle tree, the last leaf node can be duplicated to create an artificial balanced tree,  resulting in the same root hash.
 To avoid this vulnerability [in this implementation],  do not accept unbalanced merkle trees in your application.
 
+## Proof verification
+
+Use `merkleProof.verifyAgainstRoot(proof, expectedRoot, expectedLeaf, digestFn)` to check a proof against an independently trusted root and the leaf you intend to verify. Both expected values must be Buffers supplied by the caller. Obtain the root from an authenticated block header or other trusted state, not from the proof or its sender. Encode and hash the expected leaf according to your protocol, including any required leaf/internal-node domain separation.
+
+The function returns `false` for a malformed proof or a mismatching root or leaf. A proof must be a nonempty odd-length array with a Buffer root as its last node. Multi-node proofs start with two Buffers, one of which must match the expected leaf; every later pair has exactly one `null` orientation marker and one Buffer sibling. A one-node proof must equal both the expected root and leaf. `digestFn` must return a Buffer; errors thrown by that caller-supplied function propagate.
+
+A successful verification does not establish a leaf's exact position, the total leaf count or freedom from duplicate-leaf mutation. Legitimate odd-width padding is preserved. Applications that need stronger tree-shape or mutation guarantees must enforce their protocol's additional rules.
+
 
 ## Examples
 Preamble
@@ -66,7 +74,7 @@ console.log(root.toString('hex'))
 // => 'c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1'
 ```
 
-Proof (with verify)
+Proof (with an expected root and leaf)
 ``` javascript
 var merkleProof = require('merkle-lib/proof')
 var proof = merkleProof(tree, data[0])
@@ -86,9 +94,17 @@ console.log(proof.map(x => x && x.toString('hex')))
 //   'c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1'
 // ]
 
-console.log(merkleProof.verify(proof, sha256))
+// An independently trusted root for this example, not one read from the proof.
+var expectedRoot = Buffer.from('c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1', 'hex')
+console.log(merkleProof.verifyAgainstRoot(proof, expectedRoot, data[0], sha256))
 // => true
 ```
+
+## Legacy verification
+
+`merkleProof.verify(proof, digestFn)` checks internal consistency against the root inside the proof only. It does not establish membership in a trusted tree and is deprecated for security decisions. Use `verifyAgainstRoot` instead.
+
+Existing calls to `verify` retain their behavior when upgrading. If you use it, validate the proof structure described above, check an independently trusted root and the expected leaf, and require `verify` to succeed. Root and leaf comparisons without shape validation are insufficient: a later pair containing two Buffers can discard the reconstructed path.
 
 
 #### Credits

@@ -72,5 +72,26 @@ function verify (proof, digestFn) {
   return hash.equals(root)
 }
 
+function verifyAgainstRoot (proof, expectedRoot, expectedLeaf, digestFn) {
+  if (!Array.isArray(proof) || proof.length === 0 || proof.length % 2 === 0) return false
+  if (!Buffer.isBuffer(expectedRoot) || !Buffer.isBuffer(expectedLeaf) || typeof digestFn !== 'function') return false
+
+  var root = proof[proof.length - 1]
+  if (!Buffer.isBuffer(root) || !root.equals(expectedRoot)) return false
+  if (proof.length === 1) return root.equals(expectedLeaf)
+  if (!Buffer.isBuffer(proof[0]) || !Buffer.isBuffer(proof[1])) return false
+  if (!proof[0].equals(expectedLeaf) && !proof[1].equals(expectedLeaf)) return false
+
+  // Later pairs replace exactly one side with the hash reconstructed so far.
+  for (var i = 2; i < proof.length - 1; i += 2) {
+    var left = proof[i]
+    var right = proof[i + 1]
+    if (!((left === null && Buffer.isBuffer(right)) || (right === null && Buffer.isBuffer(left)))) return false
+  }
+
+  return verify(proof, digestFn)
+}
+
 module.exports = makeProof
 module.exports.verify = verify
+module.exports.verifyAgainstRoot = verifyAgainstRoot
