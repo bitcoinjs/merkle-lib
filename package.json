@@ -1,6 +1,6 @@
 {
   "name": "merkle-lib",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "A performance conscious library for merkle root and tree calculations.",
   "keywords": [
     "bitcoin",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "author": "Daniel Cousens",
   "files": [
+    "CHANGELOG.md",
     "index.js",
     "fastRoot.js",
     "proof.js"
